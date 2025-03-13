@@ -108,25 +108,25 @@ export const sendEmailOTP = async({email}: {email:string}) => {
     }
 }   
 
-export const updateAvatar = async ({email, url}:{
-    email: string;
-    url: string;
-}) => {
-    const {databases} = await createAdmingClient();
-    try {
-        const user = await getUserByEmail(email);
-        const updateFile = await databases.updateDocument(
-            appwriteConfig.databaseId,
-            appwriteConfig.usersCollectionId,
-            user.$id,
-            {
-                avatar: url
-            });
-        return parseStringify(updateFile);
-    } catch (error) {
-        handleErr(error, "Failed to rename the file.")
-    }
-}
+// export const updateAvatar = async ({email, url}:{
+//     email: string;
+//     url: string;
+// }) => {
+//     const {databases} = await createAdmingClient();
+//     try {
+//         const user = await getUserByEmail(email);
+//         const updateFile = await databases.updateDocument(
+//             appwriteConfig.databaseId,
+//             appwriteConfig.usersCollectionId,
+//             user.$id,
+//             {
+//                 avatar: url
+//             });
+//         return parseStringify(updateFile);
+//     } catch (error) {
+//         handleErr(error, "Failed to rename the file.")
+//     }
+// }
 
 const handleErr = (error:unknown, message:string)=>{
     console.log(error, message);

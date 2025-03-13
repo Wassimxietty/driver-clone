@@ -12,6 +12,7 @@ import { useTransition } from "react";
 const Sort = () => {
   const path =  usePathname();
   const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = useTransition(); // Smooth async updates
 
   const handleSort = (value: string) => {
