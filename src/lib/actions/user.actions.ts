@@ -32,15 +32,20 @@ export const createAccount = async({fullName, email} : {fullName:string, email:s
 }
 
 export const getCurrentUser = async() => {
-    const {databases, account} = await createSessionClient();
-    const result = await account.get();
+    try {
+        const {databases, account} = await createSessionClient();
+        const result = await account.get();
 
-    const user = await databases.listDocuments(
-        appwriteConfig.databaseId,
-        appwriteConfig.usersCollectionId,
-        [Query.equal('accountId', result.$id)]
-    )
-    return user.total > 0 ? parseStringify(user.documents[0]) : null
+        const user = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.usersCollectionId,
+            [Query.equal('accountId', result.$id)]
+        )
+        return user.total > 0 ? parseStringify(user.documents[0]) : null
+    } catch (error) {
+        handleErr(error, "failed to get current user. No user logged in");
+    }
+    
 }
 
 export const signOutUser = async()=>{
