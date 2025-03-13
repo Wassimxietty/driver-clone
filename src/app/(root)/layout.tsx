@@ -8,9 +8,9 @@ import { Toaster } from 'sonner'
 
 export const dynamic = 'force-dynamic'; //will make the page render on the server on each request
 const layout = async ({children}: {children:React.ReactNode}) => {
-    const currentUser = await getCurrentUser();
-    console.log(currentUser);
-    if(!currentUser) return redirect("/sign-in") 
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) return redirect("/sign-in");
   return (
     <main className='flex h-screen'>
         <SideBar {...currentUser}/>
