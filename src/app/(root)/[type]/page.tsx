@@ -8,15 +8,15 @@ import { convertFileSize, getFileTypesParams } from '@/lib/utils';
 const page = async ({searchParams, params}: SearchParamProps) => {
     const type = (await params)?.type as string || "";
     const sizeArray = await getTotalSpaceUsed();
-    const sizeType = type.slice(0, -1);
-    const size = sizeArray[sizeType] && sizeArray[sizeType].size !== undefined 
+    const sizeType = type === 'media' ? type : type.slice(0, -1);
+    const size = sizeType === 'media' ? sizeArray["audio"].size +sizeArray["video"].size : sizeArray[sizeType] && sizeArray[sizeType].size !== undefined 
     ? sizeArray[sizeType].size 
     : '0';
     const searchText = (await searchParams)?.query as string || '' ;
     const sort = (await searchParams)?.sort as string || '' ;
     const types = getFileTypesParams(type) as FileType[];
     const files = await getFiles({types: types, searchText, sort});
-    // console.log("sizeArray: ", sizeArray, "sizeType:", sizeType, "size: ", size);
+    console.log("sizeArray: ", sizeArray, "sizeType:", sizeType, "size: ", size);
 
   return (
     <div className='page-container'>

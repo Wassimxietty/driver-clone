@@ -62,19 +62,19 @@ export default async function Home() {
           <ul className="space-y-2">
             {files.documents.map((file: Models.Document) => (
               <li key={file.id} className="gap-2">
-                <Link href={file.url} className='flex cursor-pointer gap-2 flex-col rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-3 '>
+                <div  className='flex  gap-2 flex-col rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-3 '>
                     <div className='flex flex-row justify-between '>
-                        <div className="flex flex-row justify-between gap-6">
+                        <Link href={file.url} className="flex flex-row justify-between gap-6 cursor-pointer">
                           <Thumbnail type={file.type} extension={file.extension} url={file.url}/>
                           <div className="flex flex-col gap-2">
                           <p className='recent-file-name'>{file.name}</p>
                           <FormattedDateTime date={file.$createdAt} className='body-2 text-light-200' />
                           </div>
-                        </div>
+                        </Link>
                         <ActionDropdown file={file}/>
                     </div>
                     
-                </Link>
+                </div>
               </li>
             ))}
           </ul>

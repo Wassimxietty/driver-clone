@@ -84,6 +84,7 @@ const FileUploader = ({ownerID, accountID, className}: Props) => {
           <h4 className='h4 text-light-100'>Uploading</h4>
           {files.map((file, index) =>{
             const {type, extension} = getFileType(file.name);
+            console.log("type: ", type);
             return(
               <li key={`${file.name}-${index}`} className='uploader-preview-item'>
                 <div className='flex items-center gap-3'>
