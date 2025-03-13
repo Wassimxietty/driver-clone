@@ -59,7 +59,7 @@ export const getFiles = async ({types = [], searchText='', sort='$createdAt-desc
             appwriteConfig.filesCollectionId,
             queries
         )
-        console.log({files});
+        // console.log({files});
         return parseStringify(files);
     } catch (error) {
         handleErr(error, "failed to retrieve files !!")
@@ -98,7 +98,7 @@ const createQueries = (
         const [sortBy, orderBy] = sort.split("-");
         queries.push(orderBy=== 'asc' ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy))
     }
-    console.log(queries);
+    // console.log(queries);
     return queries;
 }
 
@@ -186,7 +186,7 @@ export const getTotalSpaceUsed = async () => {
                 totalSpace[fileType].latestDate = file.$updatedAt;
             }
         })
-        console.log(parseStringify(totalSpace));
+        // console.log(parseStringify(totalSpace));
         return parseStringify(totalSpace);
     } catch (error) {
         handleErr(error, "couldn't get the total space used.")
