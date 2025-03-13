@@ -31,22 +31,26 @@ export const createAccount = async({fullName, email} : {fullName:string, email:s
     return parseStringify({accountId});
 }
 
-export const getCurrentUser = async() => {
+export const getCurrentUser = async () => {
     try {
-        const {databases, account} = await createSessionClient();
-        const result = await account.get();
-
-        const user = await databases.listDocuments(
-            appwriteConfig.databaseId,
-            appwriteConfig.usersCollectionId,
-            [Query.equal('accountId', result.$id)]
-        )
-        return user.total > 0 ? parseStringify(user.documents[0]) : null
+      const { databases, account } = await createSessionClient();
+  
+      const result = await account.get();
+  
+      const user = await databases.listDocuments(
+        appwriteConfig.databaseId,
+        appwriteConfig.usersCollectionId,
+        [Query.equal("accountId", result.$id)],
+      );
+  
+      if (user.total <= 0) return null;
+  
+      return parseStringify(user.documents[0]);
     } catch (error) {
-        handleErr(error, "failed to get current user. No user logged in");
+      console.log(error);
     }
-    
-}
+  };
+  
 
 export const signOutUser = async()=>{
     const {account} = await createSessionClient();
