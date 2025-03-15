@@ -60,8 +60,8 @@ export default async function Home() {
         <h2 className="text-xl font-semibold mb-4">Recent Files</h2>
         {files.total > 0 ? (
           <ul className="space-y-2">
-            {files.documents.map((file: Models.Document) => (
-              <li key={file.id} className="gap-2">
+            {files.documents.map((file: Models.Document, index: number) => (
+              <li key={file.id || index} className="gap-2">
                 <div  className='flex  gap-2 flex-col rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-3 '>
                     <div className='flex flex-row justify-between '>
                         <Link href={file.url} className="flex flex-row justify-between gap-6 cursor-pointer">

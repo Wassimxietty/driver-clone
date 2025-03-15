@@ -1,6 +1,6 @@
 "use client"
 // imports
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -16,8 +16,9 @@ import {
 import { Input } from "./ui/input"
 import Image from 'next/image'
 import Link from 'next/link'
-import { createAccount, signInUser } from '@/lib/actions/user.actions'
+import { createAccount, getCurrentUser, signInUser } from '@/lib/actions/user.actions'
 import OTPmodal from './OTPmodal'
+import { useRouter } from 'next/navigation'
 
 type formType = 'sign-in' | 'sign-up';
 
@@ -33,6 +34,20 @@ const AuthForm = ({type}: { type: formType }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const [accountId, setAccountId] = useState(null);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    const checkUserSignedIn = async () => {
+      const currentUser = await getCurrentUser();
+      if (currentUser)  {
+        setIsSignedIn(true)
+        return router.replace("/");
+      }
+      else setIsSignedIn(false);
+    }
+    checkUserSignedIn();
+  }, [isSignedIn, router])
+   
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

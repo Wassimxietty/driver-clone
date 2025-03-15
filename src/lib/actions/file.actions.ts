@@ -66,6 +66,23 @@ export const getFiles = async ({types = [], searchText='', sort='$createdAt-desc
     }
 }
 
+// unnnecessary we can get allfiles through get files now.
+// export const getAllFiles = async() => {
+//     const {databases} = await createAdmingClient();
+//     try {
+//         const currentUser = await getCurrentUser();
+//         if(!currentUser) throw new Error("User not found");
+//         // console.log({currentUser, queries})
+//         const files = await databases.listDocuments(
+//             appwriteConfig.databaseId,
+//             appwriteConfig.filesCollectionId,
+//         )
+//         // console.log({files});
+//         return parseStringify(files);
+//     } catch (error) {
+//         handleErr(error, "failed to retrieve files !!")
+//     }
+// }
 
 export const doesFileExistByName = async (fileName: string) => {
     const {storage} = await createAdmingClient();

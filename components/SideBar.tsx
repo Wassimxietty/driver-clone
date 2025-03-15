@@ -5,21 +5,6 @@ import Image from "next/image";
 import { usePathname } from 'next/navigation';
 import { navItems } from "../constants";
 import { cn } from "@/lib/utils";
-// import {
-//   Dialog,
-//   DialogClose,
-//   DialogContent,
-//   DialogDescription,
-//   DialogFooter,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "./ui/dialog"
-// import { Button } from "./ui/button";
-// import { Input } from "./ui/input";
-// import { Label } from "./ui/label";
-// import { useState } from "react";
-// import { updateAvatar } from "@/lib/actions/user.actions";
 
 
 interface Props {
@@ -30,57 +15,9 @@ interface Props {
 
 
 const SideBar = ({ fullName, avatar, email }: Props) => {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [url, setUrl] = useState<string>("");
-
-  // const closeAllModals = () => {
-  //         setIsModalOpen(false);
-          
-  //     };
-  
-  // const handleAction = async () => {
-  //     setIsLoading(true);
-  //     let success = false;
-  //     success = await updateAvatar({email, url});
-  //     if(success) closeAllModals();
-  //     setIsLoading(false)
-  // }
   const pathname = usePathname();
-//   const renderDialogContent = ()=>{
-//     return (
-//       <DialogContent className="shad-dialog button">
-//         <DialogHeader className='flex flex-col gap-5'>
-//           <DialogTitle className='text-center text-light-100'>Share url</DialogTitle>
-//           <DialogDescription>
-//             Anyone who has this url will be able to view this.
-//           </DialogDescription>
-//         </DialogHeader>
-//         <div className="flex items-center space-x-2">
-//           <div className="grid flex-1 gap-2">
-//             <Label htmlFor="url" className="sr-only">
-//               url
-//             </Label>
-//             <Input
-//               type="url"
-//               placeholder="Enter your url here..."
-//               onChange={(e)=>setUrl(e.target.value)}
-//               value={url}
-//             />
-//           </div>
-//         </div>
-//         <DialogFooter className='flex flex-col gap-3 md:flex-row'>
-//             <Button onClick={closeAllModals} className='modal-cancel-button'>Cancel</Button>
-//             <Button onClick={handleAction} className='modal-submit-button'>
-//                 <p className='capitalize'>confirm </p>
-//                 {isLoading && (
-//                     <Image src="/assets/icons/loader.svg" alt='loader' width={24} height={24} className='animate-spin' />
-//                 )}
-//             </Button>
-//         </DialogFooter>
-//       </DialogContent>
-//       );
-// }
+
+  
   return (
     <aside className="sidebar">
             <Link href="#">
@@ -144,8 +81,84 @@ const SideBar = ({ fullName, avatar, email }: Props) => {
           </div>
       </aside>
   )
-    // IDEA FOR DIALOG OPEN TO CHANGE THE PFP OR PERHAPS SEE A SMALL TAB OPEN FOR PROFILE
-    // <Dialog open={isModalOpen} onOpenChange={setIsModalOpen} >
+    
+}
+
+export default SideBar
+
+
+// IDEA FOR DIALOG OPEN TO CHANGE THE PFP OR PERHAPS SEE A SMALL TAB OPEN FOR PROFILE
+
+// import {
+//   Dialog,
+//   DialogClose,
+//   DialogContent,
+//   DialogDescription,
+//   DialogFooter,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogTrigger,
+// } from "./ui/dialog"
+// import { Button } from "./ui/button";
+// import { Input } from "./ui/input";
+// import { Label } from "./ui/label";
+// import { useState } from "react";
+// import { updateAvatar } from "@/lib/actions/user.actions";
+
+
+
+// const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [url, setUrl] = useState<string>("");
+
+  // const closeAllModals = () => {
+  //         setIsModalOpen(false);
+          
+  //     };
+  
+  // const handleAction = async () => {
+  //     setIsLoading(true);
+  //     let success = false;
+  //     success = await updateAvatar({email, url});
+  //     if(success) closeAllModals();
+  //     setIsLoading(false)
+  // }
+//   const renderDialogContent = ()=>{
+//     return (
+//       <DialogContent className="shad-dialog button">
+//         <DialogHeader className='flex flex-col gap-5'>
+//           <DialogTitle className='text-center text-light-100'>Share url</DialogTitle>
+//           <DialogDescription>
+//             Anyone who has this url will be able to view this.
+//           </DialogDescription>
+//         </DialogHeader>
+//         <div className="flex items-center space-x-2">
+//           <div className="grid flex-1 gap-2">
+//             <Label htmlFor="url" className="sr-only">
+//               url
+//             </Label>
+//             <Input
+//               type="url"
+//               placeholder="Enter your url here..."
+//               onChange={(e)=>setUrl(e.target.value)}
+//               value={url}
+//             />
+//           </div>
+//         </div>
+//         <DialogFooter className='flex flex-col gap-3 md:flex-row'>
+//             <Button onClick={closeAllModals} className='modal-cancel-button'>Cancel</Button>
+//             <Button onClick={handleAction} className='modal-submit-button'>
+//                 <p className='capitalize'>confirm </p>
+//                 {isLoading && (
+//                     <Image src="/assets/icons/loader.svg" alt='loader' width={24} height={24} className='animate-spin' />
+//                 )}
+//             </Button>
+//         </DialogFooter>
+//       </DialogContent>
+//       );
+// }
+
+// <Dialog open={isModalOpen} onOpenChange={setIsModalOpen} >
         {/* <aside className="sidebar">
             <Link href="#">
                 <div className="flex flex-row gap-4">
@@ -212,6 +225,3 @@ const SideBar = ({ fullName, avatar, email }: Props) => {
         {renderDialogContent()}
     </Dialog>
      */}
-}
-
-export default SideBar

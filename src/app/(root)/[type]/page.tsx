@@ -1,3 +1,4 @@
+'use server'
 import React from 'react'
 import { getFiles, getTotalSpaceUsed } from '@/lib/actions/file.actions';
 import { Models } from 'node-appwrite';
@@ -6,17 +7,22 @@ import Sort from '../../../../components/Sort';
 import { convertFileSize, getFileTypesParams } from '@/lib/utils';
 
 const page = async ({searchParams, params}: SearchParamProps) => {
+
+    
     const type = (await params)?.type as string || "";
     const sizeArray = await getTotalSpaceUsed();
-    const sizeType = type === 'media' ? type : type.slice(0, -1);
-    const size = sizeType === 'media' ? sizeArray["audio"].size +sizeArray["video"].size : sizeArray[sizeType] && sizeArray[sizeType].size !== undefined 
-    ? sizeArray[sizeType].size 
-    : '0';
+    const isHome = type === "home";
+
+    // Ensure we extract a valid size type
+    const sizeType = type === 'media' ? 'media' : type ? type.slice(0, -1) : "";
+    const size = !isHome ? sizeArray[sizeType]?.size ?? 0 : sizeArray["used"];
+
     const searchText = (await searchParams)?.query as string || '' ;
     const sort = (await searchParams)?.sort as string || '' ;
     const types = getFileTypesParams(type) as FileType[];
-    const files = await getFiles({types: types, searchText, sort});
-    console.log("sizeArray: ", sizeArray, "sizeType:", sizeType, "size: ", size);
+   
+    const files = !isHome ? await getFiles({ types, searchText, sort }) : await getFiles({ types:[], searchText, sort });
+    // console.log("sizeArray: ", sizeArray, "sizeType:", sizeType, "size: ", size);
 
   return (
     <div className='page-container'>
@@ -31,7 +37,7 @@ const page = async ({searchParams, params}: SearchParamProps) => {
             </div>
         </section>
         {/* RENDER THE FILES */}
-        {files.total > 0 ? (
+        { files.total > 0 ? (
             <section className='file-list'>
                 {files.documents.map((file: Models.Document) => (
                     <Card key={file.$id} file={file} />
